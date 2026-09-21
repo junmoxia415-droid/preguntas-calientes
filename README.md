@@ -93,8 +93,11 @@ Cada push compila la app en GitHub mediante [`.github/workflows/android-build.ym
 
 ### 📥 ¿Dónde descargar el APK?
 
-- **Releases:** pestaña *Releases* del repositorio (instalable directo ✅)
-- **Artifacts:** pestaña *Actions* → elige el *run* → sección *Artifacts*
+- **Releases:** pestaña *Releases* del repositorio → descarga **`Preguntas-Calientes-v2.0.0.apk`** (instalable directo ✅)
+- **Artifacts:** pestaña *Actions* → elige el *run* → *Artifacts* → `Preguntas-Calientes-APK`
+
+> 📌 Los APK siempre llevan el nombre del juego: `Preguntas-Calientes-v<versión>.apk`
+> (nada de `app-debug.apk` — lo que descargan tus amigos se ve profesional 😎)
 
 ### 🔐 Nota sobre la firma
 

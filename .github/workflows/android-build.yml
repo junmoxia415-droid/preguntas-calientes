@@ -48,13 +48,13 @@ jobs:
 
     - name: List generated APKs
       run: |
-        echo "=== APKs generadas ==="
+        echo "=== APKs generadas (nombre oficial del juego) ==="
         find app/build/outputs/apk -name "*.apk" -exec ls -lh {} \;
 
     - name: Upload Debug APK (instalable)
       uses: actions/upload-artifact@v4
       with:
-        name: preguntas-calientes-debug (instalable)
+        name: Preguntas-Calientes-APK
         path: app/build/outputs/apk/debug/*.apk
         retention-days: 30
 

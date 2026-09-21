@@ -19,12 +19,26 @@ android {
         applicationId = "com.studiolexair.preguntascalientes"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "2.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+    }
+
+    // 📦 Los APK que se generan llevan el NOMBRE DEL JUEGO (no "app-debug.apk")
+    // Debug (distribución):  Preguntas-Calientes-v2.0.0.apk
+    // Release (sin firmar):  Preguntas-Calientes-v2.0.0-release-unsigned.apk
+    applicationVariants.all {
+        val variantName = name
+        val version = versionName
+        outputs.all {
+            val apkOutput = this as? com.android.build.gradle.internal.api.ApkVariantOutputImpl
+            apkOutput?.outputFileName =
+                if (variantName == "release") "Preguntas-Calientes-v$version-release-unsigned.apk"
+                else "Preguntas-Calientes-v$version.apk"
         }
     }
 
