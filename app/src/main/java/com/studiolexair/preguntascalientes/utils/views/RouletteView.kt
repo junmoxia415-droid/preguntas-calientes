@@ -64,7 +64,7 @@ class RouletteView @JvmOverloads constructor(
 
         val start = 0f
         ValueAnimator.ofFloat(0f, finalAngle).apply {
-            duration = 3400 + Random.nextInt(700)
+            duration = (3400 + Random.nextInt(700)).toLong()
             interpolator = DecelerateInterpolator(1.6f)
             addUpdateListener {
                 currentAngle = it.animatedValue as Float

@@ -36,7 +36,7 @@ class ParticleView @JvmOverloads constructor(
     private var bgColor = 0xFF1A0F16.toInt()
     private var w = 0; private var h = 0
 
-    private var emojis = arrayOf("✨", "❤️", "💫", "🔥")
+    private var emojis: Array<out String> = arrayOf("✨", "❤️", "💫", "🔥")
 
     private val animator = ValueAnimator.ofFloat(0f, 1f).apply {
         duration = 28000L
@@ -62,7 +62,7 @@ class ParticleView @JvmOverloads constructor(
     }
 
     /** Emojis de partícula según modo (§10: fondos distintos por modo). */
-    fun setModeEmoji(vararg e: String) { emojis = e.arrayOf(); buildParticles() }
+    fun setModeEmoji(vararg e: String) { emojis = e; buildParticles() }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         this.w = w; this.h = h

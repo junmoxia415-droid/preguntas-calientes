@@ -1,6 +1,7 @@
 package com.studiolexair.preguntascalientes.data.db
 
 import android.content.Context
+import com.studiolexair.preguntascalientes.domain.model.Achievement
 import com.studiolexair.preguntascalientes.domain.model.LevelSystem
 import com.studiolexair.preguntascalientes.domain.model.Player
 
@@ -58,7 +59,7 @@ class StatsRepository(private val context: Context) {
     suspend fun unlockedKeys(): List<String> = db.achievementDao().unlockedKeys()
 
     /** Devuelve true si ES NUEVO (recién desbloqueado). */
-    suspend fun tryUnlock(achievement: com.studiolexair.preguntascalientes.domain.model.Achievement): Boolean {
+    suspend fun tryUnlock(achievement: Achievement): Boolean {
         val result = db.achievementDao().unlock(AchievementEntity(achievement.key))
         return result != -1L
     }
@@ -66,25 +67,23 @@ class StatsRepository(private val context: Context) {
     /**
      * Revisa los logros al final de la partida y devuelve los NUEVOS desbloqueados.
      */
-    suspend fun checkEndgameAchievements(players: List<Player>, discoveredCount: Int):
-            List<com.studiolexair.preguntascalientes.domain.model.Achievement> {
-        val newOnes = mutableListOf<com.studiolexair.preguntascalientes.domain.model.Achievement>()
-        val A = com.studiolexair.preguntascalientes.domain.model.Achievement
+    suspend fun checkEndgameAchievements(players: List<Player>, discoveredCount: Int): List<Achievement> {
+        val newOnes = mutableListOf<Achievement>()
 
-        if (get(KEY_QUESTIONS) >= 1 && tryUnlock(A.FIRST_FIRE)) newOnes += A.FIRST_FIRE
-        if (get(KEY_QUESTIONS) >= 10 && tryUnlock(A.STARTER)) newOnes += A.STARTER
-        if (get(KEY_QUESTIONS) >= 100 && tryUnlock(A.CENTENARIO)) newOnes += A.CENTENARIO
-        if (get(KEY_EXTREMES) >= 10 && tryUnlock(A.SIN_MIEDO)) newOnes += A.SIN_MIEDO
-        if (get(KEY_DARES) >= 1 && tryUnlock(A.FIRST_DARE)) newOnes += A.FIRST_DARE
-        if (get(KEY_DARES) >= 10 && tryUnlock(A.DARE_10)) newOnes += A.DARE_10
-        if (players.size >= 8 && tryUnlock(A.PARTY_MASTER)) newOnes += A.PARTY_MASTER
+        if (get(KEY_QUESTIONS) >= 1 && tryUnlock(Achievement.FIRST_FIRE)) newOnes += Achievement.FIRST_FIRE
+        if (get(KEY_QUESTIONS) >= 10 && tryUnlock(Achievement.STARTER)) newOnes += Achievement.STARTER
+        if (get(KEY_QUESTIONS) >= 100 && tryUnlock(Achievement.CENTENARIO)) newOnes += Achievement.CENTENARIO
+        if (get(KEY_EXTREMES) >= 10 && tryUnlock(Achievement.SIN_MIEDO)) newOnes += Achievement.SIN_MIEDO
+        if (get(KEY_DARES) >= 1 && tryUnlock(Achievement.FIRST_DARE)) newOnes += Achievement.FIRST_DARE
+        if (get(KEY_DARES) >= 10 && tryUnlock(Achievement.DARE_10)) newOnes += Achievement.DARE_10
+        if (players.size >= 8 && tryUnlock(Achievement.PARTY_MASTER)) newOnes += Achievement.PARTY_MASTER
         players.forEach { p ->
-            if (p.maxStreak >= 10 && tryUnlock(A.IMPARABLE)) newOnes += A.IMPARABLE
-            if (p.maxStreak >= 5 && tryUnlock(A.RACHA_5)) newOnes += A.RACHA_5
-            if (p.level >= 5 && tryUnlock(A.LEVEL_5)) newOnes += A.LEVEL_5
+            if (p.maxStreak >= 10 && tryUnlock(Achievement.IMPARABLE)) newOnes += Achievement.IMPARABLE
+            if (p.maxStreak >= 5 && tryUnlock(Achievement.RACHA_5)) newOnes += Achievement.RACHA_5
+            if (p.level >= 5 && tryUnlock(Achievement.LEVEL_5)) newOnes += Achievement.LEVEL_5
         }
-        if (get(KEY_GAMES) >= 10 && tryUnlock(A.GAMES_10)) newOnes += A.GAMES_10
-        if (discoveredCount >= 50 && tryUnlock(A.COLLECTOR)) newOnes += A.COLLECTOR
+        if (get(KEY_GAMES) >= 10 && tryUnlock(Achievement.GAMES_10)) newOnes += Achievement.GAMES_10
+        if (discoveredCount >= 50 && tryUnlock(Achievement.COLLECTOR)) newOnes += Achievement.COLLECTOR
         return newOnes
     }
 
