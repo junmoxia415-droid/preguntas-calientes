@@ -2,6 +2,7 @@ package com.studiolexair.preguntascalientes
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,19 @@ class GameActivity : AppCompatActivity() {
         setupObservers()
         setupListeners()
         setupAnimations()
+        setupBackPressHandler()
+    }
+
+    /**
+     * Maneja el botón "atrás" mostrando un diálogo de confirmación
+     * (implementación moderna con OnBackPressedDispatcher)
+     */
+    private fun setupBackPressHandler() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showExitDialog()
+            }
+        })
     }
 
     private fun setupObservers() {
@@ -134,10 +148,5 @@ class GameActivity : AppCompatActivity() {
                 finish()
             }
             .show()
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        showExitDialog()
     }
 }
