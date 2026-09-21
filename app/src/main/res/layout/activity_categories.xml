@@ -193,8 +193,8 @@
                         android:valueFrom="1"
                         android:valueTo="3"
                         android:stepSize="1"
-                        app:activeTrackColor="@color/primary"
-                        app:inactiveTrackColor="#FFE4EC"
+                        app:trackColorActive="@color/primary"
+                        app:trackColorInactive="#FFE4EC"
                         app:thumbColor="@color/primary" />
 
                     <TextView
