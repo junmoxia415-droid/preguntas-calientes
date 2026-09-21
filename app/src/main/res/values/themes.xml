@@ -1,49 +1,102 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. Desarrollado por Airien Yolexis Rojas Roque - Studio Lexair -->
-    <style name="Base.Theme.PreguntasCalientes" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- ═══ Dark Party UI - Temas V2.0 (Studio Lexair) ═══ -->
+
+    <!-- Tema base oscuro compartido -->
+    <style name="Base.Theme.PreguntasCalientes" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorSecondaryVariant">@color/secondary_dark</item>
         <item name="colorOnSecondary">@color/white</item>
-        <item name="android:statusBarColor">@color/primary_dark</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:navigationBarColor">@color/background</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
 
+    <!-- 🌸 Love (rosa oscuro — tema por defecto, identidad original) -->
     <style name="Theme.PreguntasCalientes" parent="Base.Theme.PreguntasCalientes" />
 
-    <style name="Theme.PreguntasCalientes.Splash" parent="Theme.PreguntasCalientes">
-        <item name="android:windowBackground">@drawable/bg_gradient_primary</item>
+    <style name="Theme.PreguntasCalientes.Love" parent="Base.Theme.PreguntasCalientes" />
+
+    <!-- 🌙 Midnight (negro/morado) -->
+    <style name="Theme.PreguntasCalientes.Midnight" parent="Base.Theme.PreguntasCalientes">
+        <item name="colorPrimary">@color/midnight_primary</item>
+        <item name="colorPrimaryVariant">@color/midnight_primary_dark</item>
+        <item name="colorSecondary">@color/midnight_secondary</item>
+        <item name="colorSecondaryVariant">@color/midnight_primary_dark</item>
+        <item name="colorSurface">@color/midnight_surface</item>
+        <item name="android:colorBackground">@color/midnight_bg</item>
+        <item name="android:statusBarColor">@color/midnight_bg</item>
+        <item name="android:navigationBarColor">@color/midnight_bg</item>
     </style>
 
-    <!-- Text Styles -->
+    <!-- 🔥 Inferno (negro/rojo) -->
+    <style name="Theme.PreguntasCalientes.Inferno" parent="Base.Theme.PreguntasCalientes">
+        <item name="colorPrimary">@color/inferno_primary</item>
+        <item name="colorPrimaryVariant">@color/inferno_primary_dark</item>
+        <item name="colorSecondary">@color/inferno_secondary</item>
+        <item name="colorSecondaryVariant">@color/inferno_primary_dark</item>
+        <item name="colorSurface">@color/inferno_surface</item>
+        <item name="android:colorBackground">@color/inferno_bg</item>
+        <item name="android:statusBarColor">@color/inferno_bg</item>
+        <item name="android:navigationBarColor">@color/inferno_bg</item>
+    </style>
+
+    <!-- 🎉 Party (multicolor) -->
+    <style name="Theme.PreguntasCalientes.Party" parent="Base.Theme.PreguntasCalientes">
+        <item name="colorPrimary">@color/party_primary</item>
+        <item name="colorPrimaryVariant">@color/party_primary_dark</item>
+        <item name="colorSecondary">@color/party_secondary</item>
+        <item name="colorSecondaryVariant">@color/party_primary_dark</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSurface">@color/party_surface</item>
+        <item name="android:colorBackground">@color/party_bg</item>
+        <item name="android:statusBarColor">@color/party_bg</item>
+        <item name="android:navigationBarColor">@color/party_bg</item>
+    </style>
+
+    <!-- 💎 Premium (negro/dorado) -->
+    <style name="Theme.PreguntasCalientes.Premium" parent="Base.Theme.PreguntasCalientes">
+        <item name="colorPrimary">@color/premium_primary</item>
+        <item name="colorPrimaryVariant">@color/premium_primary_dark</item>
+        <item name="colorSecondary">@color/premium_secondary</item>
+        <item name="colorSecondaryVariant">@color/premium_primary_dark</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSurface">@color/premium_surface</item>
+        <item name="android:colorBackground">@color/premium_bg</item>
+        <item name="android:statusBarColor">@color/premium_bg</item>
+        <item name="android:navigationBarColor">@color/premium_bg</item>
+    </style>
+
+    <!-- Estilos de texto -->
     <style name="TextAppearance.PreguntasCalientes.Title" parent="TextAppearance.Material3.HeadlineLarge">
         <item name="android:textColor">@color/text_primary</item>
         <item name="android:textStyle">bold</item>
     </style>
-
     <style name="TextAppearance.PreguntasCalientes.Subtitle" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textColor">@color/text_primary</item>
     </style>
-
     <style name="TextAppearance.PreguntasCalientes.Body" parent="TextAppearance.Material3.BodyLarge">
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
-    <!-- Button Styles -->
+    <!-- Botones -->
     <style name="Widget.PreguntasCalientes.Button" parent="Widget.Material3.Button">
         <item name="android:textColor">@color/white</item>
-        <item name="backgroundTint">@color/primary</item>
-        <item name="cornerRadius">16dp</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="cornerRadius">18dp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:letterSpacing">0.02</item>
+        <item name="android:textStyle">bold</item>
     </style>
-
     <style name="Widget.PreguntasCalientes.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="android:textColor">@color/primary</item>
-        <item name="strokeColor">@color/primary</item>
-        <item name="cornerRadius">16dp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="cornerRadius">18dp</item>
     </style>
 </resources>

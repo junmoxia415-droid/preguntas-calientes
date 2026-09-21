@@ -3,7 +3,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- V2.0: Haptic feedback -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
+        android:name=".PreguntasApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,43 +18,33 @@
         android:theme="@style/Theme.PreguntasCalientes"
         tools:targetApi="31">
 
-        <!-- Splash Activity - Launcher -->
+        <!-- Splash animado - Launcher -->
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.PreguntasCalientes.Splash"
-            android:screenOrientation="portrait">
+            android:theme="@style/Theme.PreguntasCalientes">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".MenuActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".PlayersActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
+        <activity android:name=".ui.MenuActivity" android:exported="false" />
+        <activity android:name=".ui.ModesActivity" android:exported="false" />
+        <activity android:name=".ui.PlayersActivity" android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-
-        <activity
-            android:name=".CategoriesActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".GameActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".CreditsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.CategoriesActivity" android:exported="false" />
+        <activity android:name=".ui.RouletteActivity" android:exported="false" />
+        <activity android:name=".ui.GameActivity" android:exported="false"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity android:name=".ui.ResultsActivity" android:exported="false" />
+        <activity android:name=".ui.CollectionActivity" android:exported="false" />
+        <activity android:name=".ui.AchievementsActivity" android:exported="false" />
+        <activity android:name=".ui.StatsActivity" android:exported="false" />
+        <activity android:name=".ui.SettingsActivity" android:exported="false" />
+        <activity android:name=".ui.CustomQuestionsActivity" android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.CreditsActivity" android:exported="false" />
 
     </application>
 

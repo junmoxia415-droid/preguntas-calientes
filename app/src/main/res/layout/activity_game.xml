@@ -1,248 +1,447 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Pantalla de Juego - Desarrollado por Airien Yolexis Rojas Roque - Studio Lexair -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_light">
+    android:layout_height="match_parent">
 
-    <!-- Player Card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardPlayer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <com.studiolexair.preguntascalientes.utils.views.ParticleView
+        android:id="@+id/particleBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_gradient_primary"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="18dp">
 
+            <!-- Cabecera jugador + HUD -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🎯 Turno de:"
-                    android:textColor="#E0FFFFFF"
-                    android:textSize="14sp" />
+                    android:id="@+id/textAvatar"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/circle_bg"
+                    android:gravity="center"
+                    android:text="😎"
+                    android:textSize="24sp" />
 
-                <View
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textPlayerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jugador"
+                        android:textColor="@color/text_primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textPlayerStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Estado"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textGameIntensity"
+                    android:id="@+id/btnEndGame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#33FFFFFF"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
-                    android:text="Intensidad: Medio 😏"
-                    android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:background="@drawable/bg_chip_outline"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="7dp"
+                    android:text="🏁 Fin"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textCurrentPlayer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="NOMBRE"
-                android:textColor="@color/white"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:ellipsize="end"
-                android:maxLines="1" />
-
+            <!-- Fila HUD: puntos, racha, pasos, comodines, turno, modo -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/textPlayerStatus"
+                    android:id="@+id/textPoints"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#33FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="👫 Con Pareja"
-                    android:textColor="@color/white"
+                    android:background="@drawable/bg_chip_outline"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="⭐ 0"
+                    android:textColor="@color/accent"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Studio Lexair"
-                    android:textColor="#80FFFFFF"
-                    android:textSize="10sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Question Card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardQuestion"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toTopOf="@id/layoutButtons"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardPlayer">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="24dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_card"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="🔥 Calientes"
-                    android:textColor="@color/primary"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textIntensityBadge"
+                    android:id="@+id/textStreak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_card"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="😏 Medio"
+                    android:background="@drawable/bg_chip_outline"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:visibility="gone"
+                    android:text="🔥 x3"
                     android:textColor="@color/text_primary"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textPasses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_chip_outline"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="🛡️ 3"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/textWildcards"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_chip_outline"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="🃏 3"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/textRound"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Turno 1"
+                    android:textColor="@color/text_hint"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textQuestion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:text="¿Cuál es el lugar más atrevido donde has besado a tu pareja?"
-                android:textColor="@color/text_primary"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:lineSpacingExtra="6dp" />
-
-            <View
-                android:layout_width="40dp"
-                android:layout_height="3dp"
-                android:layout_marginTop="24dp"
-                android:background="@color/primary" />
-
-            <TextView
+                android:id="@+id/textModeBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Responde con honestidad 😏"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp"
-                android:gravity="center" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:layout_marginTop="8dp"
+                android:text="🔥 Preguntas Calientes"
+                android:textColor="@color/text_hint"
+                android:textSize="12sp" />
 
-    <!-- Buttons -->
-    <LinearLayout
-        android:id="@+id/layoutButtons"
-        android:layout_width="0dp"
+            <!-- Timer -->
+            <LinearLayout
+                android:id="@+id/timerZone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="0:20"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <ProgressBar
+                    android:id="@+id/timerProgress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:progressTint="@color/primary"
+                    android:progressBackgroundTint="@color/surface_light" />
+            </LinearLayout>
+
+            <!-- Banner de eventos -->
+            <TextView
+                android:id="@+id/textBanner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card_dark"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="9dp"
+                android:visibility="gone"
+                android:text="⚠️ EVENTO"
+                android:textAlignment="center"
+                android:textColor="@color/accent"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <!-- ═════════ CARTA (flip §11) ═════════ -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardFrame"
+                android:layout_width="match_parent"
+                android:layout_height="330dp"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="26dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardElevation="14dp"
+                android:foreground="?attr/selectableItemBackground">
+
+                <!-- Frente (oculta) -->
+                <LinearLayout
+                    android:id="@+id/cardFront"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:id="@+id/frontEmoji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔥"
+                        android:textSize="84sp" />
+
+                    <TextView
+                        android:id="@+id/frontTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="TURNO DE"
+                        android:textColor="@color/text_primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/frontHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="TOCAR PARA DESCUBRIR"
+                        android:textColor="@color/accent"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.12" />
+                </LinearLayout>
+
+                <!-- Reverso (contenido) -->
+                <ScrollView
+                    android:id="@+id/cardBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="26dp">
+
+                        <TextView
+                            android:id="@+id/textCardType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🔥 CALIENTE"
+                            android:textAlignment="center"
+                            android:textColor="@color/primary_light"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textCardContent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="¿Pregunta...?"
+                            android:textAlignment="center"
+                            android:textColor="@color/text_primary"
+                            android:textSize="21sp" />
+
+                        <TextView
+                            android:id="@+id/textCardHint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text=""
+                            android:textAlignment="center"
+                            android:textColor="@color/text_hint"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </ScrollView>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Fila verdad o reto -->
+            <LinearLayout
+                android:id="@+id/rowTruthDare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVerdad"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="58dp"
+                    android:layout_marginEnd="6dp"
+                    style="@style/Widget.PreguntasCalientes.Button"
+                    android:text="🎤 VERDAD" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnReto"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="6dp"
+                    style="@style/Widget.PreguntasCalientes.Button"
+                    android:text="💪 RETO" />
+            </LinearLayout>
+
+            <!-- Fila votación duelo -->
+            <LinearLayout
+                android:id="@+id/rowDuelVote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVoteA"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="54dp"
+                    android:layout_marginEnd="6dp"
+                    style="@style/Widget.PreguntasCalientes.Button"
+                    android:text="👈 A" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVoteB"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="6dp"
+                    style="@style/Widget.PreguntasCalientes.Button"
+                    android:text="B 👉" />
+            </LinearLayout>
+
+            <!-- Fila acciones principales -->
+            <LinearLayout
+                android:id="@+id/rowActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPositive"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.4"
+                    android:layout_height="58dp"
+                    style="@style/Widget.PreguntasCalientes.Button"
+                    android:text="✅ RESPONDÍ" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnNegative"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="8dp"
+                    style="@style/Widget.PreguntasCalientes.Button.Secondary"
+                    android:text="🙈 NO QUIERO" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPass"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    style="@style/Widget.PreguntasCalientes.Button.Secondary"
+                    android:text="🛡️ PASAR" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnWildcard"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    style="@style/Widget.PreguntasCalientes.Button.Secondary"
+                    android:text="🃏 COMODÍN" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- XP flotante -->
+    <TextView
+        android:id="@+id/textFloatXp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="140dp"
+        android:text="+30 XP"
+        android:textColor="@color/accent"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnNextPlayer"
-            style="@style/Widget.PreguntasCalientes.Button"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="⏭️ SIGUIENTE TURNO"
-            android:textSize="16sp"
-            app:cornerRadius="14dp" />
+    <!-- Confeti -->
+    <com.studiolexair.preguntascalientes.utils.views.ConfettiView
+        android:id="@+id/confettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <!-- Cuenta regresiva overlay -->
+    <FrameLayout
+        android:id="@+id/overlayCountdown"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/overlay_dark"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textCountdown"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="90sp"
+            android:textStyle="bold" />
+    </FrameLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAnotherQuestion"
-                style="@style/Widget.PreguntasCalientes.Button.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:text="🔄 OTRA PREGUNTA"
-                android:textSize="13sp"
-                app:cornerRadius="14dp"
-                app:strokeWidth="2dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnExitGame"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:text="❌ SALIR"
-                android:textColor="@color/error"
-                android:textSize="13sp"
-                app:cornerRadius="14dp"
-                app:strokeColor="@color/error" />
-        </LinearLayout>
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

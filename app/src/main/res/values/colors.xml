@@ -1,37 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Colores principales - Studio Lexair -->
+    <!-- ═══════════ Dark Party UI 2.0 - Studio Lexair ═══════════ -->
+
+    <!-- Base compartida (tema Love - rosa, el original) -->
     <color name="primary">#FF6B9D</color>
     <color name="primary_dark">#C73866</color>
     <color name="primary_light">#FF8FAB</color>
     <color name="secondary">#C73866</color>
     <color name="secondary_dark">#A02A4F</color>
-    <color name="background">#FFF0F5</color>
-    <color name="background_dark">#FFE4EC</color>
-    <color name="surface">#FFFFFF</color>
-    <color name="text_primary">#2D2D2D</color>
-    <color name="text_secondary">#6B6B6B</color>
-    <color name="text_hint">#9E9E9E</color>
     <color name="accent">#FFD93D</color>
     <color name="accent_dark">#FFC93C</color>
-    <color name="error">#E53935</color>
-    <color name="success">#43A047</color>
+
+    <!-- Fondos oscuros -->
+    <color name="background">#1A0F16</color>
+    <color name="background_end">#2A0E1E</color>
+    <color name="surface">#241520</color>
+    <color name="surface_light">#332030</color>
+    <color name="overlay_dark">#B30A0A12</color>
+
+    <!-- Texto -->
+    <color name="text_primary">#F5F0F4</color>
+    <color name="text_secondary">#B8A8B3</color>
+    <color name="text_hint">#8A7482</color>
+
+    <!-- Estados -->
+    <color name="error">#FF5252</color>
+    <color name="success">#4ADE80</color>
+    <color name="warning">#FFC93C</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
-
-    <!-- Gradientes -->
-    <color name="gradient_start">#FF6B9D</color>
-    <color name="gradient_end">#C73866</color>
-    <color name="gradient_accent_start">#FFD93D</color>
-    <color name="gradient_accent_end">#FF6B9D</color>
-
-    <!-- Chip colors -->
-    <color name="chip_background_checked">#FF6B9D</color>
-    <color name="chip_background_unchecked">#FFFFFF</color>
-    <color name="chip_text_checked">#FFFFFF</color>
-    <color name="chip_text_unchecked">#2D2D2D</color>
-
-    <!-- For selectors -->
     <color name="ripple_color">#33FF6B9D</color>
+
+    <!-- 🌙 Tema Midnight (negro/morado) -->
+    <color name="midnight_primary">#9D7BFF</color>
+    <color name="midnight_primary_dark">#6B4CC7</color>
+    <color name="midnight_secondary">#B983FF</color>
+    <color name="midnight_bg">#0D0B1E</color>
+    <color name="midnight_surface">#1B1735</color>
+
+    <!-- 🔥 Tema Inferno (negro/rojo) -->
+    <color name="inferno_primary">#FF4D4D</color>
+    <color name="inferno_primary_dark">#B32323</color>
+    <color name="inferno_secondary">#FF7A3D</color>
+    <color name="inferno_bg">#140808</color>
+    <color name="inferno_surface">#261111</color>
+
+    <!-- 🎉 Tema Party (multicolor) -->
+    <color name="party_primary">#FFD93D</color>
+    <color name="party_primary_dark">#C7A517</color>
+    <color name="party_secondary">#FF6B9D</color>
+    <color name="party_bg">#14102A</color>
+    <color name="party_surface">#231B47</color>
+
+    <!-- 💎 Tema Premium (negro/dorado) -->
+    <color name="premium_primary">#D4AF37</color>
+    <color name="premium_primary_dark">#9C7D22</color>
+    <color name="premium_secondary">#E8C766</color>
+    <color name="premium_bg">#0A0A0A</color>
+    <color name="premium_surface">#1C1A14</color>
+
+    <!-- Avatar palette (índice por colorIndex) -->
+    <color name="avatar_0">#FF6B9D</color>
+    <color name="avatar_1">#9D7BFF</color>
+    <color name="avatar_2">#4ADE80</color>
+    <color name="avatar_3">#FFD93D</color>
+    <color name="avatar_4">#4FC3F7</color>
+    <color name="avatar_5">#FF7A3D</color>
+    <color name="avatar_6">#F06292</color>
+    <color name="avatar_7">#4DB6AC</color>
 </resources>

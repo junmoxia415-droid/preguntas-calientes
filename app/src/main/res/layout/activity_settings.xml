@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.studiolexair.preguntascalientes.utils.views.ParticleView
+        android:id="@+id/particleBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/btnBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="❮"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="⚙️ Ajustes"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Audio -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="🔊 Sonido" android:textColor="@color/text_primary"
+                        android:textSize="16sp" android:textStyle="bold" />
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_weight="1"
+                            android:layout_height="wrap_content" android:text="🎵 Música"
+                            android:textColor="@color/text_secondary" android:textSize="14sp" />
+                        <TextView android:id="@+id/textMusicVal" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="55%"
+                            android:textColor="@color/text_primary" android:textSize="14sp" />
+                    </LinearLayout>
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/sliderMusic"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:value="55" android:valueFrom="0" android:valueTo="100" android:stepSize="1"
+                        app:thumbColor="@color/primary" app:trackColorActive="@color/primary"
+                        app:trackColorInactive="@color/surface_light" />
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_weight="1"
+                            android:layout_height="wrap_content" android:text="✨ Efectos"
+                            android:textColor="@color/text_secondary" android:textSize="14sp" />
+                        <TextView android:id="@+id/textSfxVal" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="80%"
+                            android:textColor="@color/text_primary" android:textSize="14sp" />
+                    </LinearLayout>
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/sliderSfx"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:value="80" android:valueFrom="0" android:valueTo="100" android:stepSize="1"
+                        app:thumbColor="@color/primary" app:trackColorActive="@color/primary"
+                        app:trackColorInactive="@color/surface_light" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/switchVibration"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" android:text="📳 Vibración"
+                        android:textColor="@color/text_primary" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Temporizador -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="⏱️ Tiempo para responder (por defecto)"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp" android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipTimerOff" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:checkable="true" android:text="∞ Sin límite" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipTimer10" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:checkable="true" android:text="10s" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipTimer20" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:checkable="true" android:text="20s" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipTimer30" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:checkable="true" android:text="30s" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipTimer60" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:checkable="true" android:text="60s" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Temas -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="🎨 Tema" android:textColor="@color/text_primary"
+                        android:textSize="16sp" android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp">
+
+                        <RadioButton android:id="@+id/radioLove" android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:text="🌸 Love (rosa)"
+                            android:textColor="@color/text_primary" />
+                        <RadioButton android:id="@+id/radioMidnight" android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:text="🌙 Midnight (negro/morado)"
+                            android:textColor="@color/text_primary" />
+                        <RadioButton android:id="@+id/radioInferno" android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:text="🔥 Inferno (negro/rojo)"
+                            android:textColor="@color/text_primary" />
+                        <RadioButton android:id="@+id/radioParty" android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:text="🎉 Party (multicolor)"
+                            android:textColor="@color/text_primary" />
+                        <RadioButton android:id="@+id/radioPremium" android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:text="💎 Premium (negro/dorado)"
+                            android:textColor="@color/text_primary" />
+                    </RadioGroup>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Contenido -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="🛡️ Contenido" android:textColor="@color/text_primary"
+                        android:textSize="16sp" android:textStyle="bold" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/switchFamiliMode"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp" android:text="🏡 Modo familiar (oculta contenido adulto)"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="La regla de oro siempre aplica: nadie está obligado a responder nada. BOTÓN PASAR disponible en cada carta."
+                        android:textColor="@color/text_hint" android:textSize="12sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

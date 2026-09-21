@@ -1,129 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Menú Principal - Desarrollado por Airien Yolexis Rojas Roque - Studio Lexair -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_light">
+    android:layout_height="match_parent">
 
-    <!-- Header -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardHeader"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <com.studiolexair.preguntascalientes.utils.views.ParticleView
+        android:id="@+id/particleBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_gradient_primary"
-            android:gravity="center"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:gravity="center_horizontal"
+            android:padding="28dp">
 
             <TextView
+                android:id="@+id/textTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🔥"
-                android:textSize="48sp" />
+                android:layout_marginTop="18dp"
+                android:text="🔥 Preguntas Calientes"
+                android:textColor="@color/text_primary"
+                android:textSize="28sp"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/textReady"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="PREGUNTAS CALIENTES"
-                android:textColor="@color/white"
-                android:textSize="22sp"
+                android:layout_marginTop="6dp"
+                android:text="¡LISTOS?"
+                android:textColor="@color/accent"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:gravity="center"
-                android:letterSpacing="0.05" />
+                android:letterSpacing="0.2" />
+
+            <!-- Continuar partida -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:visibility="gone"
+                style="@style/Widget.PreguntasCalientes.Button.Secondary"
+                android:text="💾 CONTINUAR PARTIDA" />
 
             <TextView
+                android:id="@+id/textContinueInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Party Game • Studio Lexair"
-                android:textColor="#E0FFFFFF"
+                android:visibility="gone"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
+
+            <!-- JUGAR -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPlay"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="18dp"
+                android:backgroundTint="@null"
+                android:background="@drawable/bg_button_glow"
+                app:backgroundTint="@null"
+                android:text="🔥 JUGAR"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- Grid de secciones -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardModes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardElevation="4dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="18dp"
+                    android:text="🎮  MODOS DE JUEGO"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCollection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardElevation="4dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="18dp"
+                    android:text="🃏  COLECCIÓN"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAchievements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardElevation="4dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="18dp"
+                    android:text="🏆  LOGROS"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardElevation="4dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="18dp"
+                    android:text="📊  ESTADÍSTICAS"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/rowBottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCustom"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    style="@style/Widget.PreguntasCalientes.Button.Secondary"
+                    android:text="✍️ Mis preguntas" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCredits"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    style="@style/Widget.PreguntasCalientes.Button.Secondary"
+                    android:text="ℹ️ Créditos" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSettings"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    style="@style/Widget.PreguntasCalientes.Button.Secondary"
+                    android:text="⚙️ Ajustes" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="10dp"
+                android:text="v2.0 · by Studio Lexair"
+                android:textColor="@color/text_hint"
+                android:textSize="12sp" />
+
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Menu Buttons -->
-    <LinearLayout
-        android:id="@+id/layoutButtons"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardHeader">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnNewGame"
-            style="@style/Widget.PreguntasCalientes.Button"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/menu_new_game"
-            android:textSize="18sp"
-            app:cornerRadius="16dp"
-            app:icon="@android:drawable/ic_media_play"
-            app:iconGravity="textStart"
-            app:iconPadding="12dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnRules"
-            style="@style/Widget.PreguntasCalientes.Button.Secondary"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/menu_rules"
-            android:textSize="16sp"
-            app:cornerRadius="16dp"
-            app:strokeWidth="2dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCredits"
-            style="@style/Widget.PreguntasCalientes.Button.Secondary"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/menu_credits"
-            android:textSize="16sp"
-            app:cornerRadius="16dp"
-            app:strokeWidth="2dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSettings"
-            style="@style/Widget.PreguntasCalientes.Button.Secondary"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:text="@string/menu_settings"
-            android:textSize="16sp"
-            app:cornerRadius="16dp"
-            app:strokeWidth="2dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="👨‍💻 Airien Yolexis Rojas Roque\n🎨 Studio Lexair • v1.0.0"
-            android:textColor="@color/text_secondary"
-            android:textSize="11sp"
-            android:gravity="center"
-            android:lineSpacingExtra="2dp" />
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</FrameLayout>
