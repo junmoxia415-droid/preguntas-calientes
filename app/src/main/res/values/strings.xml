@@ -1,0 +1,74 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Preguntas Calientes</string>
+    <string name="app_subtitle">Party Game</string>
+
+    <!-- Splash -->
+    <string name="splash_developed_by">Desarrollado por</string>
+    <string name="splash_developer_name">Airien Yolexis Rojas Roque</string>
+    <string name="splash_studio">Studio Lexair</string>
+    <string name="splash_year">2024</string>
+
+    <!-- Menu -->
+    <string name="menu_new_game">🎮 NUEVO JUEGO</string>
+    <string name="menu_rules">📖 REGLAS</string>
+    <string name="menu_credits">ℹ️ CRÉDITOS</string>
+    <string name="menu_settings">⚙️ CONFIGURACIÓN</string>
+    <string name="menu_title">PREGUNTAS CALIENTES</string>
+
+    <!-- Players -->
+    <string name="players_title">Agregar Jugadores</string>
+    <string name="players_hint_name">Nombre del jugador</string>
+    <string name="players_has_partner">Tiene Pareja</string>
+    <string name="players_single">Soltero(a)</string>
+    <string name="players_add">➕ Agregar Jugador</string>
+    <string name="players_start">▶️ COMENZAR JUEGO</string>
+    <string name="players_empty">No hay jugadores aún.\n¡Agrega al menos 2!</string>
+    <string name="players_count">%d jugador(es)</string>
+    <string name="players_min_error">Necesitas mínimo 2 jugadores</string>
+
+    <!-- Categories -->
+    <string name="categories_title">Configurar Categorías</string>
+    <string name="categories_select">Selecciona tipos de preguntas:</string>
+    <string name="categories_calientes">🔥 Calientes</string>
+    <string name="categories_interesantes">🤔 Interesantes</string>
+    <string name="categories_divertidas">😄 Divertidas</string>
+    <string name="categories_atrevidas">🌶️ Atrevidas</string>
+    <string name="categories_romanticas">💑 Románticas</string>
+    <string name="categories_confesiones">🎭 Confesiones</string>
+    <string name="categories_intensity">Intensidad:</string>
+    <string name="categories_intensity_soft">Suave</string>
+    <string name="categories_intensity_extreme">Extremo</string>
+    <string name="categories_start">▶️ INICIAR PARTIDA</string>
+    <string name="categories_select_all">Seleccionar Todo</string>
+    <string name="categories_deselect_all">Deseleccionar Todo</string>
+
+    <!-- Game -->
+    <string name="game_turn">Turno de:</string>
+    <string name="game_status">Estado:</string>
+    <string name="game_next">⏭️ SIGUIENTE</string>
+    <string name="game_another">🔄 OTRA PREGUNTA</string>
+    <string name="game_exit">❌ SALIR</string>
+    <string name="game_intensity_label">Intensidad:</string>
+
+    <!-- Credits -->
+    <string name="credits_title">CRÉDITOS</string>
+    <string name="credits_developed_by">Desarrollado por:</string>
+    <string name="credits_studio_label">Studio:</string>
+    <string name="credits_version">Versión: 1.0.0</string>
+    <string name="credits_year">Año: 2024</string>
+    <string name="credits_made_with">Hecho con ❤️ para compartir\ncon amigos</string>
+    <string name="credits_back">🔙 VOLVER</string>
+    <string name="credits_thanks_title">¡Gracias por jugar! 🎉</string>
+    <string name="credits_thanks_message">Esperamos que disfrutes esta app con tus amigos. Si te gustó, compártela.</string>
+
+    <!-- Common -->
+    <string name="back">Volver</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+
+    <!-- Rules -->
+    <string name="rules_title">Reglas del Juego</string>
+</resources>

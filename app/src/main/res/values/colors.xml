@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores principales - Studio Lexair -->
+    <color name="primary">#FF6B9D</color>
+    <color name="primary_dark">#C73866</color>
+    <color name="primary_light">#FF8FAB</color>
+    <color name="secondary">#C73866</color>
+    <color name="secondary_dark">#A02A4F</color>
+    <color name="background">#FFF0F5</color>
+    <color name="background_dark">#FFE4EC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#2D2D2D</color>
+    <color name="text_secondary">#6B6B6B</color>
+    <color name="text_hint">#9E9E9E</color>
+    <color name="accent">#FFD93D</color>
+    <color name="accent_dark">#FFC93C</color>
+    <color name="error">#E53935</color>
+    <color name="success">#43A047</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Gradientes -->
+    <color name="gradient_start">#FF6B9D</color>
+    <color name="gradient_end">#C73866</color>
+    <color name="gradient_accent_start">#FFD93D</color>
+    <color name="gradient_accent_end">#FF6B9D</color>
+
+    <!-- Chip colors -->
+    <color name="chip_background_checked">#FF6B9D</color>
+    <color name="chip_background_unchecked">#FFFFFF</color>
+    <color name="chip_text_checked">#FFFFFF</color>
+    <color name="chip_text_unchecked">#2D2D2D</color>
+
+    <!-- For selectors -->
+    <color name="ripple_color">#33FF6B9D</color>
+</resources>

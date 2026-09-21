@@ -1,0 +1,118 @@
+name: Android CI/CD (Kotlin)
+# Desarrollado por Airien Yolexis Rojas Roque - Studio Lexair
+# Pipeline: compila la app Android (Kotlin), corre tests + lint,
+# sube el APK como artefacto y crea un Release automático en main.
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # Necesario para crear Releases con el GITHUB_TOKEN
+
+jobs:
+  build:
+    name: 📦 Compilar APK
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build with Gradle
+      run: ./gradlew build --stacktrace
+
+    - name: Run tests
+      run: ./gradlew test --stacktrace
+
+    # APK de DEBUG: firmado con el keystore debug -> instalable directamente
+    - name: Build Debug APK (instalable)
+      run: ./gradlew assembleDebug --stacktrace
+
+    # APK de RELEASE: sin signingConfig -> sale sin firmar (para distribución futura)
+    - name: Build Release APK
+      run: ./gradlew assembleRelease --stacktrace
+
+    - name: List generated APKs
+      run: |
+        echo "=== APKs generadas ==="
+        find app/build/outputs/apk -name "*.apk" -exec ls -lh {} \;
+
+    - name: Upload Debug APK (instalable)
+      uses: actions/upload-artifact@v4
+      with:
+        name: preguntas-calientes-debug (instalable)
+        path: app/build/outputs/apk/debug/*.apk
+        retention-days: 30
+
+    - name: Upload Release APK (sin firmar)
+      uses: actions/upload-artifact@v4
+      with:
+        name: preguntas-calientes-release-unsigned
+        path: app/build/outputs/apk/release/*.apk
+        retention-days: 30
+
+    - name: Create Release 🚀
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      uses: softprops/action-gh-release@v2
+      with:
+        files: app/build/outputs/apk/debug/*.apk
+        tag_name: v1.0.${{ github.run_number }}
+        name: "Preguntas Calientes v1.0.${{ github.run_number }}"
+        body: |
+          🔥 **Preguntas Calientes - Party Game**
+
+          **Desarrollado por:** Airien Yolexis Rojas Roque
+          **Studio:** Studio Lexair
+          **Versión:** 1.0.${{ github.run_number }}
+          **Build:** #${{ github.run_number }}
+
+          ### 📱 Cambios en esta versión:
+          - Compilación automática desde GitHub Actions
+          - 120+ preguntas incluidas
+          - Soporte para Android 7.0+ (API 24 - 34)
+
+          ### 📥 Instalación:
+          1. Descarga el APK adjunto (versión debug firmada).
+          2. En tu Android permite "Instalar apps de origen desconocido".
+          3. Instala y ¡a jugar!
+
+          ---
+          © 2024 Studio Lexair - Todos los derechos reservados
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  lint:
+    name: 🔍 Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Run lint
+      run: ./gradlew lint --stacktrace
+    - name: Upload lint report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: lint-report
+        path: app/build/reports/lint-results-*.html
