@@ -3,18 +3,20 @@ package com.studiolexair.preguntascalientes.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.studiolexair.preguntascalientes.audio.SoundManager
 import com.studiolexair.preguntascalientes.data.db.SessionRepository
 import com.studiolexair.preguntascalientes.databinding.ActivityMenuBinding
 import com.studiolexair.preguntascalientes.utils.GameSession
 import com.studiolexair.preguntascalientes.utils.HapticsHelper
+import com.studiolexair.preguntascalientes.utils.PartyDialog
+import com.studiolexair.preguntascalientes.utils.PartyDialog.showParty
 import kotlinx.coroutines.launch
 
 /**
- * Menú principal V2.0 (catálogo §32): JUGAR / MODOS / COLECCIÓN /
- * LOGROS / ESTADÍSTICAS / AJUSTES + Continuar partida (§26).
+ * Menú principal V2.1 (catálogo §32): JUGAR (directo a modos) /
+ * 👥 JUGADORES (equipo persistente) / MODOS / COLECCIÓN / LOGROS /
+ * ESTADÍSTICAS / AJUSTES + Continuar partida (§26).
  */
 class MenuActivity : BaseActivity() {
 
@@ -33,8 +35,8 @@ class MenuActivity : BaseActivity() {
 
     private fun animateEntry() {
         val views = listOf(binding.textTitle, binding.textReady, binding.btnPlay,
-            binding.cardModes, binding.cardCollection, binding.cardAchievements,
-            binding.cardStats, binding.rowBottom)
+            binding.cardPlayers, binding.cardModes, binding.cardCollection,
+            binding.cardAchievements, binding.cardStats, binding.rowBottom)
         views.forEachIndexed { i, v ->
             v.alpha = 0f; v.translationY = 40f
             v.animate().alpha(1f).translationY(0f)
@@ -50,12 +52,16 @@ class MenuActivity : BaseActivity() {
 
     private fun setupButtons() {
         binding.btnPlay.sfxClick {
-            GameSession.reset()
-            startActivity(Intent(this, PlayersActivity::class.java))
+            // V2.1: la plantilla persiste; JUGAR va directo a elegir modo
+            GameSession.resetMatch()
+            startActivity(Intent(this, ModesActivity::class.java))
         }
         binding.btnContinue.sfxClick {
             HapticsHelper.event(this)
             startActivity(Intent(this, GameActivity::class.java).putExtra("continue", true))
+        }
+        binding.cardPlayers.sfxClick {
+            startActivity(Intent(this, PlayersActivity::class.java).putExtra("roster", true))
         }
         binding.cardModes.sfxClick { startActivity(Intent(this, ModesActivity::class.java)) }
         binding.cardCollection.sfxClick { startActivity(Intent(this, CollectionActivity::class.java)) }
@@ -69,6 +75,9 @@ class MenuActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         SoundManager.playMusic(this, 1)
+        // Badge del equipo persistente
+        val n = GameSession.players.size
+        binding.textRosterBadge.text = if (n > 0) "$n en el equipo ❤️" else "¡Crea tu equipo! ✨"
         // §26: mostrar "Continuar partida" si hay una guardada
         lifecycleScope.launch {
             val summary = SessionRepository.summary(this@MenuActivity)
@@ -81,12 +90,12 @@ class MenuActivity : BaseActivity() {
     private fun setupBackHandling() {
         onBackPressedDispatcher.addCallback(this, object : androidx.activity.OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                AlertDialog.Builder(this@MenuActivity)
+                PartyDialog.builder(this@MenuActivity)
                     .setTitle("🔥 Salir de Preguntas Calientes")
                     .setMessage("¿Seguro que quieres salir? ¡La fiesta te espera!")
                     .setPositiveButton("Salir") { _, _ -> finishAffinity() }
                     .setNegativeButton("Seguir jugando", null)
-                    .show()
+                    .showParty()
             }
         })
     }

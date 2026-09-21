@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import com.studiolexair.preguntascalientes.utils.PartyDialog
+import com.studiolexair.preguntascalientes.utils.PartyDialog.showParty
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -89,7 +90,7 @@ class CustomQuestionsActivity : BaseActivity() {
         }
         layout.addView(edit); layout.addView(spinner); layout.addView(intensity); layout.addView(target)
 
-        AlertDialog.Builder(this)
+        PartyDialog.builder(this)
             .setTitle("✍️ Nueva pregunta")
             .setView(layout)
             .setPositiveButton("Guardar") { _, _ ->
@@ -114,7 +115,7 @@ class CustomQuestionsActivity : BaseActivity() {
                 }
             }
             .setNegativeButton("Cancelar", null)
-            .show()
+            .showParty()
     }
 
     class CustomAdapter(

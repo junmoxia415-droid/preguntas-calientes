@@ -1,7 +1,8 @@
 package com.studiolexair.preguntascalientes.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
+import com.studiolexair.preguntascalientes.utils.PartyDialog
+import com.studiolexair.preguntascalientes.utils.PartyDialog.showParty
 import com.studiolexair.preguntascalientes.audio.SoundManager
 import com.studiolexair.preguntascalientes.databinding.ActivitySettingsBinding
 import com.studiolexair.preguntascalientes.utils.HapticsHelper
@@ -115,13 +116,13 @@ class SettingsActivity : BaseActivity() {
         binding.switchFamiliMode.setOnCheckedChangeListener { _, on ->
             SoundManager.click(this)
             if (on) {
-                AlertDialog.Builder(this)
+                PartyDialog.builder(this)
                     .setTitle("🏡 Modo familiar")
                     .setMessage("Se ocultarán las categorías 🔥 Calientes, 🌶️ Atrevidas y 🎭 Confesiones, y la intensidad máxima será Medio. Perfecto para jugar con cualquiera.")
                     .setPositiveButton("Activar") { _, _ -> PrefsManager.setFamiliarMode(this, true) }
                     .setNegativeButton("Cancelar") { _, _ -> binding.switchFamiliMode.isChecked = false }
                     .setOnCancelListener { binding.switchFamiliMode.isChecked = false }
-                    .show()
+                    .showParty()
             } else {
                 PrefsManager.setFamiliarMode(this, false)
             }

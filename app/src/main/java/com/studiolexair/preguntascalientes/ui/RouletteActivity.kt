@@ -2,7 +2,8 @@ package com.studiolexair.preguntascalientes.ui
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
+import com.studiolexair.preguntascalientes.utils.PartyDialog
+import com.studiolexair.preguntascalientes.utils.PartyDialog.showParty
 import com.studiolexair.preguntascalientes.audio.SoundManager
 import com.studiolexair.preguntascalientes.databinding.ActivityRouletteBinding
 import com.studiolexair.preguntascalientes.domain.model.Category
@@ -60,7 +61,7 @@ class RouletteActivity : BaseActivity() {
 
     private fun confirmMode(mode: GameMode) {
         ticking = false
-        AlertDialog.Builder(this)
+        PartyDialog.builder(this)
             .setTitle(mode.title())
             .setMessage("${mode.description}\n\n¿Jugamos en este modo?")
             .setPositiveButton("🔥 ¡Vamos!") { _, _ ->
@@ -73,7 +74,7 @@ class RouletteActivity : BaseActivity() {
             }
             .setNegativeButton("🎡 Girar otra vez", null)
             .setOnCancelListener { binding.textResult.text = "" }
-            .show()
+            .showParty()
     }
 
     override fun onStop() { ticking = false; super.onStop() }

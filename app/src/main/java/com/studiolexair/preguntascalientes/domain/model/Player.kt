@@ -4,18 +4,21 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 /**
- * Perfil de jugador V2.0: avatar, color, pronombre, XP, nivel, racha,
- * pasos, comodines y estadísticas de la partida.
+ * Perfil de jugador V2.1: avatar (60 disponibles), color, pronombre,
+ * estado de relación + PAREJA VINCULADA (partnerName, sincronización
+ * bidireccional), XP, nivel, racha, pasos, comodines y estadísticas.
  * Desarrollado por Airien Yolexis Rojas Roque - Studio Lexair
  */
 @Parcelize
 data class Player(
     val id: Int,
     val name: String,
-    val hasPartner: Boolean,
+    var hasPartner: Boolean,
     val avatar: String = defaultAvatar(id),
     val colorIndex: Int = (id - 1) % PLAYER_COLORS.size,
     val pronoun: String? = null,
+    /** Nombre de la pareja vinculada (jugador existente o escrito a mano). */
+    var partnerName: String? = null,
     // Progresión en partida
     var xp: Int = 0,
     var points: Int = 0,
@@ -41,6 +44,11 @@ data class Player(
     fun getStatusEmoji(): String = if (hasPartner) "👫" else "💔"
     fun getStatusText(): String = if (hasPartner) "Con Pareja" else "Soltero(a)"
 
+    /** Texto de vínculo para mostrar en la tarjeta del jugador. */
+    fun partnerLabel(): String? = partnerName?.let { "❤️ con $it" }
+
+    fun avatarColor(): Long = colorFor(colorIndex)
+
     fun addXpAndPoints(base: Int) {
         val total = base * streakMultiplier
         xp += total
@@ -64,10 +72,20 @@ data class Player(
         const val STREAK_FIRE = 5
         const val STREAK_LEGEND = 10
 
+        /** 🎭 60 avatares disponibles para elegir. */
         val AVATAR_CHOICES = listOf(
-            "😎", "🔥", "😈", "🥰", "🦊", "🐺", "🦁", "🐯",
-            "🦄", "👸", "🤴", "👽", "🤠", "🥳", "😇", "🍀"
+            // Caritas y personajes
+            "😎", "😈", "🥰", "🤪", "😜", "🤩", "🥵", "🥶", "🤯", "😏",
+            "🙃", "😋", "🤓", "🥸", "🤑", "🤭", "🤫", "😴", "🤤", "😇",
+            // Animales
+            "🦊", "🐺", "🦁", "🐯", "🐻", "🐼", "🐨", "🐸", "🐵", "🐱",
+            "🐶", "🐰", "🦄", "🐷", "🐙", "🦋", "🐢", "🦖", "🦩", "🐳",
+            "🦈", "🐝", "🐞", "🐥", "🐧", "🐭",
+            // Fantasía
+            "👽", "🤖", "👻", "💀", "🎃", "👸", "🤴", "🧙", "🧛", "🧜",
+            "🦸", "🧚", "🍀", "🔥"
         )
+
         val PLAYER_COLORS = listOf(
             0xFFFF6B9D, 0xFF9D7BFF, 0xFF4ADE80, 0xFFFFD93D,
             0xFF4FC3F7, 0xFFFF7A3D, 0xFFF06292, 0xFF4DB6AC

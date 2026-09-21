@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Frente de carta: borde degradado temático + interior oscuro (estilo cómic) -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="?attr/colorPrimary"
+                android:endColor="?attr/colorSecondary"
+                android:angle="315" />
+            <corners android:radius="26dp" />
+        </shape>
+    </item>
+    <item
+        android:left="6dp" android:top="6dp"
+        android:right="6dp" android:bottom="6dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="@color/surface_light"
+                android:endColor="@color/surface"
+                android:angle="135" />
+            <corners android:radius="21dp" />
+        </shape>
+    </item>
+</layer-list>

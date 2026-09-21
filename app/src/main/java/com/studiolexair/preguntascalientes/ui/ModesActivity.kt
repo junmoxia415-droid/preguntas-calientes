@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.studiolexair.preguntascalientes.databinding.ActivityModesBinding
 import com.studiolexair.preguntascalientes.databinding.ItemModeBinding
 import com.studiolexair.preguntascalientes.domain.model.GameMode
+import com.studiolexair.preguntascalientes.utils.GameIcons
 import com.studiolexair.preguntascalientes.utils.GameSession
 
 /**
- * Selector de modos de juego (catálogo §1 y §24).
+ * Selector de modos de juego V2.1 (catálogo §1 y §24).
+ * V2.1: usa los iconos SVG propios (GameIcons) y respeta la
+ * PLANTILLA PERSISTENTE de jugadores — elegir modo NUNCA la borra.
  */
 class ModesActivity : BaseActivity() {
 
@@ -28,8 +31,10 @@ class ModesActivity : BaseActivity() {
 
         binding.recyclerModes.layoutManager = LinearLayoutManager(this)
         binding.recyclerModes.adapter = ModesAdapter { mode ->
-            GameSession.reset()
+            // V2.1: cambiar de modo conserva la plantilla de jugadores
             GameSession.mode = mode
+            GameSession.engine = null
+            GameSession.continueAvailable = false
             val next = when {
                 mode == GameMode.ALEATORIO -> Intent(this, RouletteActivity::class.java)
                 else -> Intent(this, PlayersActivity::class.java)
@@ -62,8 +67,9 @@ class ModesAdapter(
     override fun onBindViewHolder(holder: VH, position: Int) {
         val mode = getItem(position)
         holder.binding.apply {
-            textModeEmoji.text = mode.emoji
-            textModeName.text = mode.displayName
+            // V2.1: icono SVG propio del juego
+            imgModeIcon.setImageResource(GameIcons.forMode(mode))
+            textModeName.text = mode.title()
             textModeDesc.text = mode.description
             root.setOnClickListener {
                 root.animate().scaleX(0.96f).scaleY(0.96f).setDuration(80).withEndAction {

@@ -49,6 +49,15 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/textPartner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="❤️ con X"
+                android:textColor="@color/accent"
+                android:textSize="12sp" />
+
+            <TextView
                 android:id="@+id/textPlayerLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -51,13 +51,30 @@ implementado en la v2.0 y qué queda en roadmap.
 | 44 | **Fin de partida**: ganador con animación, podio 🥇🥈🥉, stats por jugador, logros nuevos, confeti | ✅ | `ResultsActivity` |
 | 45 | **Identidad Studio Lexair** (splash + créditos + footer) | ✅ | Vistas |
 
+## 🎨 V2.1 — LOTE UX (versión 2.1.0)
+
+Petición directa del usuario (10 puntos), todo implementado:
+
+| # | Petición | Implementación | Dónde |
+|---|----------|----------------|-------|
+| 1 | **Elegir pareja al añadir jugador** (existente o nombre a mano) | Switch ❤️ + Spinner (jugadores actuales o "✏️ Escribir nombre...") + EditText; **sincronización bidireccional** automática cuando ambos existen; desvinculación segura al borrar | `PlayersActivity`, `GameSession.syncPartnerFor()` |
+| 2 | **Botón "NO QUIERO" dejaba de crecer** | Ambos botones de acción a altura fija 58dp, insets 0, maxLines 2, ellipsize | `activity_game.xml` |
+| 3 | **Jugadores desde el MENÚ + plantilla persistente** | Nueva tarjeta 👥 JUGADORES en el menú ("Mi equipo"); la plantilla se guarda en SharedPreferences (Gson) y aparece pre-cargada en TODOS los modos; JUGAR va directo a elegir modo sin borrar a nadie | `MenuActivity`, `GameSession.ensureRosterLoaded/saveRoster` |
+| 4 | **Carta con borde estilo cómic** | Nuevo frente/reverso: layer-list con borde degradado `colorPrimary→colorSecondary→colorAccent` del tema activo + interior oscuro redondeado | `bg_card_front.xml`, `bg_card_back.xml` |
+| 5 | **Iconos SVG propios del juego** | 10 vector drawables propios (llama, beso, dado, cartas, rayo, calavera, corona, máscara, diana, espadas, trofeo) + `GameIcons` que mapea modo/tipo de carta → icono; se usan en modos y frente de carta | `res/drawable/ic_*.xml`, `utils/GameIcons.kt` |
+| 6 | **~60 avatares** | `Player.AVATAR_CHOICES` ampliado a 60 (caritas, animales, fantasía) | `Player.kt` |
+| 7 | **Colimetría: coherencia al cambiar de tema** | Auditoría completa: 0 hex duros en layouts; chips, bordes de carta, diálogos e iconos usan `?attr/colorPrimary/Secondary/Accent` → todos siguen al tema 🌸🌙🔥🎉💎 | `bg_chip_outline.xml` etc. |
+| 8 | **Ventanas modales propias (adiós gris)** | Estilo `PartyAlertDialog` (surface oscuro, borde primario, título en color del tema) + helper `PartyDialog`; migrados los 9 diálogos de la app (salir, fin de partida, comodines, categorías, picker, nueva pregunta, ruleta, modo familiar) | `utils/PartyDialog.kt`, `themes.xml` |
+| 9 | **BUG: se podía responder sin voltear** | Acciones ocultas por defecto + guardas `if (!flipped) return` en responder/fallar/pasar | `GameActivity` |
+| 10 | **Timer solo tras el flip** | El timer arranca al TERMINAR la animación de flip (nunca con la carta boca abajo) | `GameActivity.flipCard()` |
+
 ## 🚧 ROADMAP (próximas versiones)
 
 | # | Mejora | Estado | Etapa |
 |---|--------|--------|-------|
 | 9/10 | Partículas reactivas al toque + fondos por modo | Parcial (emojis por intensidad ya) | V2.1 |
 | 20 | Llegar a **500+ preguntas** (arquitectura de packs lista) | 🚧 196 + 45 retos hoy | V2.2 |
-| 30 | Ilustraciones vectoriales propias para iconos | 🚧 (emoji + drawables) | V2.2 |
+| 30 | Ilustraciones vectoriales propias para iconos | ✅ V2.1 (10 iconos SVG propios + GameIcons) | Entregada |
 | 35 | **Multijugador local** (Wi-Fi/Bluetooth) | ⏳ | V2.4 |
 | 36 | **Multijugador online** con salas y códigos | ⏳ | V3.0 |
 | 37 | **Modo IA** generador de preguntas (opcional, online) | ⏳ | V3.0 |

@@ -197,15 +197,15 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <!-- ═════════ CARTA (flip §11) ═════════ -->
+            <!-- ═════════ CARTA (flip §11, bordes cómic V2.1) ═════════ -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardFrame"
                 android:layout_width="match_parent"
                 android:layout_height="330dp"
                 android:layout_marginTop="14dp"
                 app:cardCornerRadius="26dp"
-                app:cardBackgroundColor="@color/surface"
-                app:cardElevation="14dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
                 android:foreground="?attr/selectableItemBackground">
 
                 <!-- Frente (oculta) -->
@@ -215,14 +215,24 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="24dp">
+                    android:padding="24dp"
+                    android:background="@drawable/bg_card_front">
+
+                    <ImageView
+                        android:id="@+id/imgFrontIcon"
+                        android:layout_width="84dp"
+                        android:layout_height="84dp"
+                        android:src="@drawable/ic_flame"
+                        app:tint="?attr/colorPrimary"
+                        android:contentDescription="Tipo de carta" />
 
                     <TextView
                         android:id="@+id/frontEmoji"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="🔥"
-                        android:textSize="84sp" />
+                        android:textSize="40sp" />
 
                     <TextView
                         android:id="@+id/frontTitle"
@@ -252,6 +262,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:visibility="gone"
+                    android:background="@drawable/bg_card_back"
                     android:fillViewport="true">
 
                     <LinearLayout
@@ -350,19 +361,25 @@
                     android:text="B 👉" />
             </LinearLayout>
 
-            <!-- Fila acciones principales -->
+            <!-- Fila acciones principales (oculta hasta hacer FLIP) -->
             <LinearLayout
                 android:id="@+id/rowActions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPositive"
                     android:layout_width="0dp"
                     android:layout_weight="1.4"
                     android:layout_height="58dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="14sp"
                     style="@style/Widget.PreguntasCalientes.Button"
                     android:text="✅ RESPONDÍ" />
 
@@ -372,6 +389,11 @@
                     android:layout_weight="1"
                     android:layout_height="58dp"
                     android:layout_marginStart="8dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="13sp"
                     style="@style/Widget.PreguntasCalientes.Button.Secondary"
                     android:text="🙈 NO QUIERO" />
             </LinearLayout>
@@ -387,8 +409,12 @@
                     android:id="@+id/btnPass"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_marginEnd="6dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:maxLines="1"
+                    android:textSize="13sp"
                     style="@style/Widget.PreguntasCalientes.Button.Secondary"
                     android:text="🛡️ PASAR" />
 
@@ -396,8 +422,12 @@
                     android:id="@+id/btnWildcard"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_marginStart="6dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:maxLines="1"
+                    android:textSize="13sp"
                     style="@style/Widget.PreguntasCalientes.Button.Secondary"
                     android:text="🃏 COMODÍN" />
             </LinearLayout>

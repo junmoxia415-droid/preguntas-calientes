@@ -18,6 +18,8 @@ abstract class BaseActivity : AppCompatActivity() {
         // Aplicar tema propio antes de super.onCreate (§29)
         setTheme(PrefsManager.theme(this).styleRes)
         super.onCreate(savedInstanceState)
+        // V2.1: plantilla persistente de jugadores disponible en toda la app
+        com.studiolexair.preguntascalientes.utils.GameSession.ensureRosterLoaded(this)
     }
 
     /** Click con sonido + haptic. Usar en botones principales. */

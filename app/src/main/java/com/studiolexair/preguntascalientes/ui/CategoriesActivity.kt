@@ -3,7 +3,8 @@ package com.studiolexair.preguntascalientes.ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import com.studiolexair.preguntascalientes.utils.PartyDialog
+import com.studiolexair.preguntascalientes.utils.PartyDialog.showParty
 import com.studiolexair.preguntascalientes.audio.SoundManager
 import com.studiolexair.preguntascalientes.databinding.ActivityCategoriesBinding
 import com.studiolexair.preguntascalientes.domain.model.Category
@@ -114,7 +115,7 @@ class CategoriesActivity : BaseActivity() {
         }
         // §38: confirmación de intensidad extrema
         if (GameSession.intensity == 3) {
-            AlertDialog.Builder(this)
+            PartyDialog.builder(this)
                 .setTitle("🔥 Intensidad EXTREMA")
                 .setMessage("El contenido será muy atrevido. Todo el grupo debe estar de acuerdo y siempre puedes usar PASAR sin coste.\n\n¿Continuamos?")
                 .setPositiveButton("🔥 A por ello") { _, _ -> launchGame() }
@@ -123,7 +124,7 @@ class CategoriesActivity : BaseActivity() {
                     binding.sliderIntensity.value = 2f
                     launchGame()
                 }
-                .show()
+                .showParty()
         } else launchGame()
     }
 

@@ -15,14 +15,15 @@
         android:gravity="center_vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/textModeEmoji"
+        <ImageView
+            android:id="@+id/imgModeIcon"
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:background="@drawable/circle_bg"
-            android:gravity="center"
-            android:text="🔥"
-            android:textSize="24sp" />
+            android:padding="13dp"
+            android:src="@drawable/ic_flame"
+            app:tint="?attr/colorPrimary"
+            android:contentDescription="Icono del modo" />
 
         <LinearLayout
             android:layout_width="0dp"

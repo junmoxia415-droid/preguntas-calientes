@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icono propio Studio Lexair: espadas cruzadas -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6.92,5H5V6.08C5,7.45 6.06,8.56 7.41,8.63L6.22,9.82C5.83,10.21 5.83,10.84 6.22,11.23C6.61,11.62 7.24,11.62 7.63,11.23L8.81,10.05L9.82,11.06L13.71,7.17L9.82,5.68L6.92,5Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M17.08,5H19V6.08C19,7.45 17.94,8.56 16.59,8.63L17.78,9.82C18.17,10.21 18.17,10.84 17.78,11.23C17.39,11.62 16.76,11.62 16.37,11.23L15.19,10.05L14.18,11.06L10.29,7.17L14.18,5.68L17.08,5Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12.53,11.53L6.34,17.72C5.95,18.11 5.95,18.74 6.34,19.13C6.73,19.52 7.36,19.52 7.75,19.13L13.94,12.94L12.53,11.53Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M11.47,11.53L17.66,17.72C18.05,18.11 18.05,18.74 17.66,19.13C17.27,19.52 16.64,19.52 16.25,19.13L10.06,12.94L11.47,11.53Z"/>
+</vector>

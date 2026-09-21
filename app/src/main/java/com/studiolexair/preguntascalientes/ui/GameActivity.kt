@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
+import com.studiolexair.preguntascalientes.R
 import com.studiolexair.preguntascalientes.audio.SoundManager
 import com.studiolexair.preguntascalientes.data.questions.QuestionRepository
 import com.studiolexair.preguntascalientes.data.db.SessionRepository
@@ -19,8 +19,11 @@ import com.studiolexair.preguntascalientes.domain.model.CardType
 import com.studiolexair.preguntascalientes.domain.model.Category
 import com.studiolexair.preguntascalientes.domain.model.GameCard
 import com.studiolexair.preguntascalientes.domain.model.Player
+import com.studiolexair.preguntascalientes.utils.GameIcons
 import com.studiolexair.preguntascalientes.utils.GameSession
 import com.studiolexair.preguntascalientes.utils.HapticsHelper
+import com.studiolexair.preguntascalientes.utils.PartyDialog
+import com.studiolexair.preguntascalientes.utils.PartyDialog.showParty
 import com.studiolexair.preguntascalientes.utils.PrefsManager
 import kotlinx.coroutines.launch
 
@@ -184,7 +187,8 @@ class GameActivity : BaseActivity() {
         dareMode = c.challenge != null
         duelMode = c.type == CardType.DUELO
 
-        // Frente de la carta (oculta)
+        // Frente de la carta (oculta) — icono SVG propio según el tipo
+        binding.imgFrontIcon.setImageResource(GameIcons.forCardType(c.type))
         binding.frontEmoji.text = c.frontEmoji
         binding.frontTitle.text = if (c.isSpecial) "CARTA ESPECIAL" else engine.currentPlayer.name
         binding.frontHint.text = "TOCAR PARA DESCUBRIR"
@@ -200,7 +204,7 @@ class GameActivity : BaseActivity() {
             }
         }
         updateHeader()
-        startTimerIfNeeded()
+        // V2.1: el timer arranca SOLO al terminar el flip (ver flipCard)
     }
 
     // ═══════════ FLIP 3D (§11) ═══════════
@@ -221,7 +225,17 @@ class GameActivity : BaseActivity() {
                 renderCardContent(c)
             }
         })
-        AnimatorSet().apply { playSequentially(out, inn); start() }
+        AnimatorSet().apply {
+            playSequentially(out, inn)
+            addListener(object : android.animation.AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: android.animation.Animator) {
+                    // V2.1 §15: el timer arranca SOLO cuando termina el flip
+                    // (nunca con la carta boca abajo)
+                    startTimerIfNeeded()
+                }
+            })
+            start()
+        }
     }
 
     private fun renderCardContent(c: GameCard) {
@@ -277,6 +291,7 @@ class GameActivity : BaseActivity() {
     private fun showTruthDareChoice() {
         binding.cardFront.visibility = View.VISIBLE
         binding.cardBack.visibility = View.GONE
+        binding.imgFrontIcon.setImageResource(R.drawable.ic_mask)
         binding.frontEmoji.text = "🎭"
         binding.frontTitle.text = "VERDAD O RETO"
         binding.frontHint.text = "${engine.currentPlayer.name}, elige tu destino"
@@ -304,6 +319,8 @@ class GameActivity : BaseActivity() {
     // ═══════════ Resolución ═══════════
 
     private fun onPositive() {
+        // V2.1: IMPOSIBLE responder sin haber volteado la carta
+        if (!flipped) return
         val c = card
         if (c == null) { advanceAfterResolve(); return }
 
@@ -338,6 +355,8 @@ class GameActivity : BaseActivity() {
     }
 
     private fun onNegative() {
+        // V2.1: imposible resolver sin flip
+        if (!flipped) return
         engine.resolveFail()
         HapticsHelper.fail(this)
         SoundManager.play(this, SoundManager.SFX_WHOOSH)
@@ -346,6 +365,8 @@ class GameActivity : BaseActivity() {
     }
 
     private fun onPass(free: Boolean) {
+        // V2.1: imposible pasar sin flip (no se gasta paso a ciegas)
+        if (!free && !flipped) return
         val p = engine.currentPlayer
         if (engine.pass(free)) {
             SoundManager.play(this, SoundManager.SFX_WHOOSH)
@@ -412,7 +433,8 @@ class GameActivity : BaseActivity() {
         duelMode = false
         binding.cardBack.visibility = View.GONE
         binding.cardFront.visibility = View.VISIBLE
-        binding.rowActions.visibility = View.VISIBLE
+        // V2.1: las acciones permanecen ocultas hasta el flip
+        binding.rowActions.visibility = View.GONE
         binding.rowTruthDare.visibility = View.GONE
         binding.rowDuelVote.visibility = View.GONE
         binding.btnNegative.visibility = View.VISIBLE
@@ -424,6 +446,8 @@ class GameActivity : BaseActivity() {
     private fun updateHeader() {
         val p = engine.currentPlayer
         binding.textAvatar.text = p.avatar
+        // V2.1: círculo del avatar teñido con el color del jugador
+        binding.textAvatar.background = PlayersAdapter.tintedCircle(binding.root, p)
         binding.textPlayerName.text = p.name
         binding.textPlayerStatus.text = "${p.getStatusEmoji()} ${p.getStatusText()} · Nivel ${p.level}"
         binding.textPoints.text = "⭐ ${p.points}"
@@ -480,7 +504,7 @@ class GameActivity : BaseActivity() {
         }
         val kinds = GameEngine.Wildcard.values()
         val labels = kinds.map { "${it.emoji} ${it.label}" }.toTypedArray()
-        AlertDialog.Builder(this)
+        PartyDialog.builder(this)
             .setTitle("🃏 Comodines de ${p.name} (${p.wildcardsLeft})")
             .setItems(labels) { _, which ->
                 val kind = kinds[which]
@@ -519,24 +543,24 @@ class GameActivity : BaseActivity() {
                     }
                 }
             }
-            .show()
+            .showParty()
     }
 
     private fun showCategoryPicker(onPick: (Category) -> Unit) {
         val cats = Category.visible(PrefsManager.familiarMode(this))
-        AlertDialog.Builder(this)
+        PartyDialog.builder(this)
             .setTitle("🎯 Elige categoría")
             .setItems(cats.map { "${it.emoji} ${it.displayName}" }.toTypedArray()) { _, i -> onPick(cats[i]) }
-            .show()
+            .showParty()
     }
 
     private fun showPlayerPicker(onPick: (Int) -> Unit) {
         val others = engine.players.filter { it.id != engine.currentPlayer.id }
-        AlertDialog.Builder(this)
+        PartyDialog.builder(this)
             .setTitle("🎯 ¿Quién responde?")
             .setItems(others.map { "${it.avatar} ${it.name}" }.toTypedArray()) { _, i -> onPick(others[i].id) }
             .setCancelable(false)
-            .show()
+            .showParty()
     }
 
     // ═══════════ Efectos ═══════════
@@ -569,7 +593,7 @@ class GameActivity : BaseActivity() {
     // ═══════════ Fin de partida (§44) ═══════════
 
     private fun confirmEndGame() {
-        AlertDialog.Builder(this)
+        PartyDialog.builder(this)
             .setTitle("🏁 Terminar partida")
             .setMessage("¿Terminar y ver los resultados?")
             .setPositiveButton("Ver resultados 🏆") { _, _ -> endGame() }
@@ -581,7 +605,7 @@ class GameActivity : BaseActivity() {
                 }
             }
             .setNeutralButton("Seguir jugando", null)
-            .show()
+            .showParty()
     }
 
     private fun endGame() {
@@ -617,7 +641,7 @@ class GameActivity : BaseActivity() {
         onBackPressedDispatcher.addCallback(this, object : androidx.activity.OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (!::engine.isInitialized) { finish(); return }
-                AlertDialog.Builder(this@GameActivity)
+                PartyDialog.builder(this@GameActivity)
                     .setTitle("❌ Salir de la partida")
                     .setMessage("¿Estás seguro? Puedes guardar la partida y continuar luego.")
                     .setPositiveButton("Sí, salir (guardar) 💾") { _, _ ->
@@ -635,7 +659,7 @@ class GameActivity : BaseActivity() {
                             finish()
                         }
                     }
-                    .show()
+                    .showParty()
             }
         })
     }

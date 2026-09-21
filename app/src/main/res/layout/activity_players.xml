@@ -35,6 +35,7 @@
                     android:textSize="22sp" />
 
                 <TextView
+                    android:id="@+id/textTitle"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -130,6 +131,35 @@
                         android:layout_marginTop="8dp"
                         android:text="❤️  Tiene pareja"
                         android:textColor="@color/text_primary" />
+
+                    <!-- Vínculo de pareja: elegir jugador existente o escribir su nombre -->
+                    <LinearLayout
+                        android:id="@+id/containerPartner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <Spinner
+                            android:id="@+id/spinnerPartner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_input"
+                            android:padding="12dp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editPartnerName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:hint="Nombre de su pareja (se vinculará cuando la agregues)"
+                            android:textColorHint="@color/text_hint"
+                            android:textColor="@color/text_primary"
+                            android:backgroundTint="@color/primary"
+                            android:maxLength="14"
+                            android:maxLines="1" />
+                    </LinearLayout>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnAdd"

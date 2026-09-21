@@ -4,7 +4,7 @@ Aplicación Android nativa (Kotlin) que convierte cualquier reunión en una fies
 **cartas con efectos, 11 modos de juego, XP, rachas, retos, eventos, logros y
 una Dark Party UI con 5 temas, sonidos y vibración.** 100% offline.
 
-![Version](https://img.shields.io/badge/version-2.0.0-FF6B9D)
+![Version](https://img.shields.io/badge/version-2.1.0-FF6B9D)
 ![Min SDK](https://img.shields.io/badge/minSDK-24-brightgreen)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-purple)
 ![Build](https://github.com/junmoxia415-droid/preguntas-calientes/actions/workflows/android-build.yml/badge.svg)
@@ -93,7 +93,7 @@ Cada push compila la app en GitHub mediante [`.github/workflows/android-build.ym
 
 ### 📥 ¿Dónde descargar el APK?
 
-- **Releases:** pestaña *Releases* del repositorio → descarga **`Preguntas-Calientes-v2.0.0.apk`** (instalable directo ✅)
+- **Releases:** pestaña *Releases* del repositorio → descarga **`Preguntas-Calientes-v2.1.0.apk`** (instalable directo ✅)
 - **Artifacts:** pestaña *Actions* → elige el *run* → *Artifacts* → `Preguntas-Calientes-APK`
 
 > 📌 Los APK siempre llevan el nombre del juego: `Preguntas-Calientes-v<versión>.apk`
